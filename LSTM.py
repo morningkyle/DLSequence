@@ -3,31 +3,37 @@ from keras.layers import LSTM, Dense, Activation
 import numpy as np
 
 
+'''
+Smaller values are easier to getter better training result(eg. less epochs needed).
+'''
 
-from numpy import array
+def init_test_sequence(length):
+    seq = np.array([i for i in range(length)])
+    print("test sequence: ", seq)
+    x = seq.reshape(length, 1, 1)
+    y = seq.reshape(length, 1)
+    return x, y
 
 
-length = 10
-seq = np.array([i/float(length) for i in range(length)])
-print(seq)
-X = seq.reshape(length, 1, 1)
-y = seq.reshape(length, 1)
+def create_model(n_neurons):
+    # Create LSTM
+    model = Sequential()
+    model.add(LSTM(n_neurons, input_shape=(1, 1)))
+    model.add(Dense(1))
+    model.compile(loss='mean_squared_error', optimizer='adam')
+    print(model.summary())
+    return model
+
 
 # define LSTM configuration
-n_neurons = 2
-n_batch = length
-n_epoch = 1000
+length = 10
+xt, yt = init_test_sequence(length)
+model = create_model(3)
+# Train LSTM
+model.fit(xt, yt, epochs=10000, batch_size=length, verbose=2)
+# Evaluate
+result = model.predict(xt, batch_size=length, verbose=0)
+for a, b in zip(result, yt):
+    print('predicted: ', a, 'target: ', b)
 
-# create LSTM
-model = Sequential()
-model.add(LSTM(n_neurons, input_shape=(1, 1)))
-model.add(Dense(1))
-model.compile(loss='mean_squared_error', optimizer='adam')
 print(model.summary())
-
-# train LSTM
-model.fit(X, y, epochs=n_epoch, batch_size=n_batch, verbose=2)
-# evaluate
-result = model.predict(X, batch_size=n_batch, verbose=0)
-for value in result:
-    print('%.1f' % value)
