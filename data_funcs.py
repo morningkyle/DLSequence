@@ -4,8 +4,7 @@ import math
 
 def rnn_test_data(length, u=1, v=1, w=1):
     num = length
-    xt = np.array([i/num for i in range(num)])
-    print(xt.shape)
+    xt = np.array([i for i in range(num)])
     ht = np.zeros(100)
     zt = np.zeros(100)
     yt = np.zeros(100)
@@ -16,12 +15,8 @@ def rnn_test_data(length, u=1, v=1, w=1):
     return xt, yt
 
 
-import pydot
-
-pydot.Dot.create(pydot.Dot())
-
 if __name__ == '__main__':
-    xt, yt = rnn_test_data(100, u=1,  v=1)
+    xt, yt = rnn_test_data(100, u=0.01,  v=0.01, w=100)
     print(xt, yt)
 
 
