@@ -42,6 +42,8 @@ model.set_weights(weights)
 print(weights)
 
 # Start training
+# FIXME: with above input data, the more data we used to train, the bad training result we have.
+# FIXME: not sure why???
 history = model.fit(x=x_train[0:3], y=y_train[0:3], batch_size=1, epochs=1, shuffle=False, verbose=2)
 print(model.get_weights())
 
