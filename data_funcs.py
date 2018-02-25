@@ -5,9 +5,9 @@ import math
 def rnn_test_data(length, u=1, v=1, w=1):
     num = length
     xt = np.array([i for i in range(num)])
-    ht = np.zeros(100)
-    zt = np.zeros(100)
-    yt = np.zeros(100)
+    ht = np.zeros(num)
+    zt = np.zeros(num)
+    yt = np.zeros(num)
     for i in range(num):
         zt[i] = u * xt[i] + v * ht[i-1]
         ht[i] = math.tanh(zt[i])
