@@ -20,7 +20,7 @@ def create_model(n_neurons):
     model = Sequential()
     model.add(LSTM(n_neurons, input_shape=(1, 1)))
     model.add(Dense(1))
-    model.compile(loss='mean_squared_error', optimizer='adam')
+    model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
     print(model.summary())
     return model
 
