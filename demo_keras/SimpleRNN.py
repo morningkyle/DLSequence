@@ -1,12 +1,9 @@
 from keras.models import Sequential
-from keras.layers import SimpleRNN, Dense, Activation
-from keras import optimizers
+from keras.layers import SimpleRNN, Dense
 from keras.utils import plot_model
-from keras.callbacks import CSVLogger, ModelCheckpoint
+from keras.callbacks import CSVLogger
 
 from data_funcs import rnn_test_data
-from MyCallback import MyCallback
-
 
 '''
 Generate test data from a real simple RNN model, and then use these data to train a new simple
